@@ -2,36 +2,42 @@
 
 namespace Galoa\ExerciciosPhp\TextWrap;
 
-/** Classe para resolução do desafio. */
+/**
+ * Classe para resolução do desafio. 
+ */
 
 class Resolucao implements TextWrapInterface {
 
-  /** 
-   * @var string myText
-   *   Parâmetro que guarda o texto que será trabalho 
-   * @var array uSafe
-   *  Parâmetro que guarda um vetor de caracteres UTF-8 safe
-   * @var int index
-   *  Parâmetro que guarda o índice atual do vetor 
-   * @var int len
-   *  Parâmetro que guarda tamanho total do texto a ser trabalhado
-   * @var int counter
-   *  Contadora para verificar se tamanho da linha foi ultrapassado
-   * @var string blank
-   *  Parâmetro que guarda espaço em branco
+  /**
+   * @var string 
    */
   private string $myText;
+  /**
+   * @var array
+   */
   private array $uSafe;
+  /**
+   * @var int
+   */
   private int $index;
+  /**
+   * @var int
+   */
   private int $len;
+  /**
+   * @var int
+   */
   private int $counter;
+  /**
+   * @var string
+   */
   private string $blank; 
   
   /**
   *   {@inheritdoc}
   */
 
-  /** 
+  /**
    * Construtor sem parâmetros que inicializa o objeto com valores default
    */
 
@@ -72,7 +78,7 @@ class Resolucao implements TextWrapInterface {
     }
   }
 
-  /** 
+  /**
    * Método que pega uma palavra do vetor de caracteres e retorna, 
    * atualizando o índice e uma contadora
   */
@@ -91,7 +97,7 @@ class Resolucao implements TextWrapInterface {
     return $word;
   }
 
-  /** 
+  /**
    * Método que pega uma palavra maior que um tamanho e quebra em duas palavras
    * 
    * @param string word
