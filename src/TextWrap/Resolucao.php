@@ -145,12 +145,15 @@ class Resolucao implements TextWrapInterface {
    */
   private function removeBlank(array $vectorT): array {
     for ($i = 0; $i < count($vectorT); $i++) {
+      $word = "";
       $array = str_split($vectorT[$i], 1);
       $len = count($array);
-      if ($this->isBlank($array[$len - 1]) ){
+      if ($this->isBlank($array[$len - 1])) {
         array_pop($array);
       }
-      $vectorT[$i] = implode("", $array); 
+       foreach ($array as $key => $value) {
+         $word .= $value;
+       }
     }
     return $vectorT;
   }
@@ -184,6 +187,7 @@ class Resolucao implements TextWrapInterface {
         if (strlen($aux) < $length) {
           array_push($result, $word);
           $word = $aux;
+          $word .= $this->blank;
           $this->counter = 0;
           $this->blank = "";
         }
@@ -214,7 +218,7 @@ class Resolucao implements TextWrapInterface {
         $word .= $aux;
       }
     }
-    #$result = $this->removeBlank($result);
+    $result = $this->removeBlank($result);
     return $result;
   }
 
