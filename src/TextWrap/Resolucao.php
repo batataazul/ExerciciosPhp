@@ -4,38 +4,44 @@ namespace Galoa\ExerciciosPhp\TextWrap;
 
 /**
  * Classe para resolução do desafio.
- * 
+ *
  */
 
 class Resolucao implements TextWrapInterface {
 
   /**
-   * Atributo que recebe o texto a ser trabalhado
-   * @var string 
+   * Atributo que recebe o texto a ser trabalhado.
+   * 
+   * @var string
    */
   private $myText;
   /**
-   * Atributo que recebe o vetor de caracteres UTF-8
+   * Atributo que recebe o vetor de caracteres.
+   * 
    * @var array
    */
   private $uSafe;
   /**
-   * Atributo que recebe a posição atual do vetor
+   * Atributo que recebe a posição atual do vetor.
+   * 
    * @var int
    */
   private $index;
   /**
-   * Tamanho total do texto a ser trabalhado
+   * Tamanho total do texto a ser trabalhado.
+   * 
    * @var int
    */
   private $len;
   /**
-   * Contadora para verificar se ultrapassamos o tamanho da linha
+   * Contadora para verificar se ultrapassamos o tamanho da linha.
+   * 
    * @var int
    */
   private $counter;
   /**
-   * Atributo que recebe espaço em branco
+   * Atributo que recebe espaço em branco.
+   * 
    * @var string
    */
   private $blank; 
@@ -45,7 +51,7 @@ class Resolucao implements TextWrapInterface {
   */
 
   /**
-   * Construtor sem parâmetros que inicializa o objeto com valores default
+   * Construtor sem parâmetros que inicializa o objeto com valores default.
    */
 
   public function __construct() {
@@ -59,15 +65,16 @@ class Resolucao implements TextWrapInterface {
   }
 
   /**
-   * Método que verifica se um caractere é branco usando Regex
+   * Método que verifica se um caractere é branco usando Regex.
    *
    * @param string $char
-   *   String de um caractere para ser verificada
+   *   String de um caractere para ser verificada.
    * @param int $length
    *   Em quantos caracteres a linha deverá ser quebrada.
    *
-   * @return bool 
-   *   Flag verdadeira se for branco ou falso se não for, ou se a String for maior do que 1
+   * @return bool
+   *   Flag verdadeira se for branco ou falso se não for, 
+   *   ou se a String for maior do que um caractere.
    *   caractere.
    */
 
@@ -86,8 +93,9 @@ class Resolucao implements TextWrapInterface {
   }
 
   /**
-   * Método que pega uma palavra do vetor de caracteres e retorna, 
-   * atualizando o índice e uma contadora
+   * Método que pega uma palavra do vetor de caracteres e retorna.
+   *
+   * Atualiza o índice e uma contadora.
   */
 
   private function getWord() : string {
@@ -105,20 +113,20 @@ class Resolucao implements TextWrapInterface {
   }
 
   /**
-   * Método que pega uma palavra maior que um tamanho e quebra em duas palavras
+   * Método que pega uma palavra maior que um tamanho e quebra em duas palavras.
    * 
    * @param string word
-   *   Palavra que será quebrada
+   *   Palavra que será quebrada.
    * @param string word2
-   *   Referência para retornar segunda palavra
+   *   Referência para retornar segunda palavra.
    * @param int length
-   *   Tamanho máximo que um pedaço pode ter
+   *   Tamanho máximo que um pedaço pode ter.
    * 
    * @return string
-   *   Retorna por valor primeiro pedaço da palavra e o segundo por referência
+   *   Retorna por valor primeiro pedaço da palavra e o segundo por referência.
   */
   private function breakWord(string $word, string &$word2, int $length) : string {
-    $auxAr = mb_str_split($word,1,"UTF-8");
+    $auxAr = str_split($word,1);
     $word = "";
     $i = 0;
     for(; $i < $length; $i++) {
@@ -149,12 +157,12 @@ class Resolucao implements TextWrapInterface {
     $aux = "";
     $aux2 = "";
     $this->myText = $text;
-    $this->uSafe = mb_str_split($this->myText,1,"UTF-8");
+    $this->uSafe = str_split($this->myText,1);
     $this->len = count($this->uSafe);
     while($this->index < $this->len){
       $aux = $this->getWord();
       if ($this->counter -1 > $length){
-        if(mb_strlen($aux,"UTF-8") < $length) {
+        if(strlen($aux) < $length) {
           array_push($result, $word);
           $word = $aux;
           $this->counter = 0;
@@ -166,10 +174,10 @@ class Resolucao implements TextWrapInterface {
             array_push($result,$word);
             $word = "";
             $aux = $aux2;
-          }while(mb_strlen($aux2,"UTF-8") > $length);
+          }while(strlen($aux2) > $length);
           $aux2 .= $this->blank;
           $word = $aux2;
-          $this->counter = mb_strlen($aux2, "UTF-8");
+          $this->counter = mb_strlen($aux2);
           $aux2 = "";
         }
       } elseif ($this->counter - 1 == $length){
