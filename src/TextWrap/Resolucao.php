@@ -2,18 +2,27 @@
 
 namespace Galoa\ExerciciosPhp\TextWrap;
 
+/**
+ * Classe para resolução do desafio. COntém um método para fazer text wrapping e métodos auxiliares
+ * para este método.
+ */
+
 class Resolucao implements TextWrapInterface {
 
-  private string $myText;
-  private array $uSafe;
-  private int $index;
-  private int $len;
-  private int $counter;
-  private string $blank;
+  private string $myText; /** Parâmetro que guarda o texto que será trabalho */
+  private array $uSafe; /** Parâmetro que guarda um vetor de caracteres UTF-8 safe */
+  private int $index; /** Parâmetro que guarda o índice atual do vetor */
+  private int $len; /** Parâmetro que guarda tamanho total do texto a ser trabalhado */
+  private int $counter; /** Contadora para verificar se tamanho da linha foi ultrapassado */
+  private string $blank; /** Parâmetro que guarda espaço em branco */
   /**
-  * {@inheritdoc}
-  *
+  *   {@inheritdoc}
   */
+
+  /** 
+   * Construtor sem parâmetros que inicializa o objeto com valores default
+   */
+
   public function __construct() {
     $this->myText = "";
     $this->uSafe = array();
@@ -26,11 +35,17 @@ class Resolucao implements TextWrapInterface {
 
   /**
    * Método que verifica se um caractere é branco usando Regex
+   *
    * @param string $char
-   *  String de um caractere para ser verificada
+   *   String de um caractere para ser verificada
+   * @param int $length
+   *   Em quantos caracteres a linha deverá ser quebrada.
+   *
    * @return bool 
-   *  Flag verdadeira se for branco ou falso se não for, ou se a String for maior do que 1
-  */
+   *   Flag verdadeira se for branco ou falso se não for, ou se a String for maior do que 1
+   *   caractere.
+   */
+
   private function isBlank(string $char) : bool {
     $pattern = "/\s/u";
     if (mb_strlen($char,"UTF-8") > 1) {
@@ -44,9 +59,12 @@ class Resolucao implements TextWrapInterface {
       }
     }
   }
+
   /** 
-   * Método que pega uma palavra do vetor de caracteres e retorna, atualizando o índice e uma contadora
+   * Método que pega uma palavra do vetor de caracteres e retorna, 
+   * atualizando o índice e uma contadora
   */
+
   private function getWord() : string {
     $word = "";
     for (; $this->index < $this->len ; $this->index++,$this->counter++) { 
@@ -62,15 +80,17 @@ class Resolucao implements TextWrapInterface {
   }
 
   /** 
-   *  Método que pega uma palavra maior que um tamanho e quebra em duas palavras
-   *  @param string word
-   *      Palavra que será quebrada
-   *  @param string word2
-   *      Referência para retornar segunda palavra
-   *  @param int length
-   *      Tamanho máximo que um pedaço pode ter
-   *  @return string
-   *      Retorna por valor primeiro pedaço da palavra e o segundo por referência
+   * Método que pega uma palavra maior que um tamanho e quebra em duas palavras
+   * 
+   * @param string word
+   *   Palavra que será quebrada
+   * @param string word2
+   *   Referência para retornar segunda palavra
+   * @param int length
+   *   Tamanho máximo que um pedaço pode ter
+   * 
+   * @return string
+   *   Retorna por valor primeiro pedaço da palavra e o segundo por referência
   */
   private function breakWord(string $word, string &$word2, int $length) : string {
     $auxAr = mb_str_split($word,1,"UTF-8");
@@ -86,6 +106,18 @@ class Resolucao implements TextWrapInterface {
 
   }
 
+  /**
+   * Quebra uma string em diversas strings com tamanho passado por parâmetro.
+   *
+   * @param string $text
+   *   O texto que será utilizado como entrada.
+   * @param int $length
+   *   Em quantos caracteres a linha deverá ser quebrada.
+   *
+   * @return array
+   *   Um array de strings equivalente ao texto recebido por parâmetro porém
+   *   respeitando o comprimento de linha e as regras especificadas acima.
+   */
   public function textWrap(string $text, int $length): array {
     $result = array();
     $word = "";
