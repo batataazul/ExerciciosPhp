@@ -6,8 +6,7 @@ namespace Galoa\ExerciciosPhp\TextWrap;
  * Classe para resolução do desafio.
  */
 
-class Resolucao implements TextWrapInterface
-{
+class Resolucao implements TextWrapInterface {
 
   /**
    * Atributo que recebe o texto a ser trabalhado.
@@ -47,17 +46,15 @@ class Resolucao implements TextWrapInterface
   private $blank;
 
   /**
-   *   {@inheritdoc}
+   * {@inheritdoc}
    */
 
   /**
    * Construtor sem parâmetros que inicializa o objeto com valores default.
    */
-
-  public function __construct()
-  {
+  public function __construct() {
     $this->myText = "";
-    $this->uSafe = array();
+    $this->uSafe = [];
     $this->index = 0;
     $this->len = 0;
     $this->counter = 0;
@@ -77,17 +74,18 @@ class Resolucao implements TextWrapInterface
    *   ou se a String for maior do que um caractere.
    *   caractere.
    */
+
   private function isBlank(string $char): bool
   {
     $pattern = "/\s/u";
     if (strlen($char) > 1) {
       echo ("Not Char");
-      return false;
+      return FALSE;
     } else {
       if (preg_match($pattern, $char) == 1) {
-        return true;
+        return TRUE;
       } else {
-        return false;
+        return FALSE;
       }
     }
   }
@@ -97,8 +95,7 @@ class Resolucao implements TextWrapInterface
    *
    * Atualiza o índice e uma contadora.
    */
-  private function getWord(): string
-  {
+  private function getWord(): string {
     $word = "";
     for (; $this->index < $this->len; $this->index++, $this->counter++) {
       if ($this->isBlank($this->uSafe[$this->index])) {
@@ -126,8 +123,8 @@ class Resolucao implements TextWrapInterface
    * @return string
    *   Retorna por valor primeiro pedaço da palavra e o segundo por referência.
    */
-  private function breakWord(string $word, string &$word2, int $length): string
-  {
+
+  private function breakWord(string $word, string &$word2, int $length): string {
     $auxAr = str_split($word, 1);
     $word = "";
     $i = 0;
@@ -152,9 +149,8 @@ class Resolucao implements TextWrapInterface
    *   Um array de strings equivalente ao texto recebido por parâmetro porém
    *   respeitando o comprimento de linha e as regras especificadas acima.
    */
-  public function textWrap(string $text, int $length): array
-  {
-    $result = array();
+  public function textWrap(string $text, int $length): array {
+    $result = [];
     $word = "";
     $aux = "";
     $aux2 = "";
@@ -177,6 +173,7 @@ class Resolucao implements TextWrapInterface
             $aux = $aux2;
           } while (strlen($aux2) > $length);
           $aux2 .= $this->blank;
+          $this->blank = "";
           $word = $aux2;
           $this->counter = mb_strlen($aux2);
           $aux2 = "";
@@ -188,6 +185,7 @@ class Resolucao implements TextWrapInterface
         $word = "";
       } else {
         $aux .= $this->blank;
+        $this->blank = "";
         $word .= $aux;
       }
     }
