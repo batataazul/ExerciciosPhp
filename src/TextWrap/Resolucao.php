@@ -71,16 +71,16 @@ class Resolucao implements TextWrapInterface {
    *   ou se a String for maior do que um caractere.
    *   caractere.
    */
-  private function isBlank(string $char): bool  {
+  private function isBlank(string $char): bool {
     $pattern = "/\s/u";
     if (strlen($char) > 1) {
       echo ("Not Char");
       return FALSE;
-    } 
+    }
     else {
       if (preg_match($pattern, $char) == 1) {
         return TRUE;
-      } 
+      }
       else {
         return FALSE;
       }
@@ -100,7 +100,7 @@ class Resolucao implements TextWrapInterface {
         $this->counter++;
         $this->index++;
         return $word;
-      } 
+      }
       else {
         $word .= $this->uSafe[$this->index];
       }
@@ -121,7 +121,6 @@ class Resolucao implements TextWrapInterface {
    * @return string
    *   Retorna por valor primeiro pedaço da palavra e o segundo por referência.
    */
-
   private function breakWord(string $word, string &$word2, int $length): string {
     $auxAr = str_split($word, 1);
     $word = "";
@@ -133,6 +132,27 @@ class Resolucao implements TextWrapInterface {
       $word2 .= $auxAr;
     }
     return $word;
+  }
+
+  /**
+   * Função que remove espaços em branco do final de cada string de um vetor.
+   * 
+   * @param array $vectorT
+   *  Vetor de Strings.
+   * 
+   * @return array
+   *  Novo vetor de Strings corrigido, sem espaços em branco no final.
+   */
+  private function removeBlank(array $vectorT): array {
+    for ($i = 0; $i < count($vectorT); $i++) {
+      $array = str_split($vectorT[$i], 1);
+      $len = count($array);
+      if($this->isBlank($array[$len-1])){
+        array_pop($array);
+      }
+      $vectorT[$i] = implode("",$array); 
+    }
+    return $vectorT;
   }
 
   /**
@@ -194,6 +214,7 @@ class Resolucao implements TextWrapInterface {
         $word .= $aux;
       }
     }
+    $result = $this->removeBlank($result);
     return $result;
   }
 
