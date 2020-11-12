@@ -4,8 +4,8 @@ namespace Galoa\ExerciciosPhp\TextWrap;
 
 /**
  * Classe para resolução do desafio.
+ * 
  */
-
 class Resolucao implements TextWrapInterface {
 
   /**
@@ -66,8 +66,6 @@ class Resolucao implements TextWrapInterface {
    *
    * @param string $char
    *   String de um caractere para ser verificada.
-   * @param int $length
-   *   Em quantos caracteres a linha deverá ser quebrada.
    *
    * @return bool
    *   Flag verdadeira se for branco ou falso se não for, 
@@ -75,8 +73,7 @@ class Resolucao implements TextWrapInterface {
    *   caractere.
    */
 
-  private function isBlank(string $char): bool
-  {
+  private function isBlank(string $char): bool  {
     $pattern = "/\s/u";
     if (strlen($char) > 1) {
       echo ("Not Char");
@@ -157,6 +154,9 @@ class Resolucao implements TextWrapInterface {
     $this->myText = $text;
     $this->uSafe = str_split($this->myText, 1);
     $this->len = count($this->uSafe);
+    if ($this->len < 1){
+      return [];
+    }
     while ($this->index < $this->len) {
       $aux = $this->getWord();
       if ($this->counter - 1 > $length) {
@@ -164,6 +164,7 @@ class Resolucao implements TextWrapInterface {
           array_push($result, $word);
           $word = $aux;
           $this->counter = 0;
+          $this->blank = "";
         } else {
           do {
             $aux = $this->breakWord($aux, $aux2, $length);
