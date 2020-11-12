@@ -136,21 +136,21 @@ class Resolucao implements TextWrapInterface {
 
   /**
    * Função que remove espaços em branco do final de cada string de um vetor.
-   * 
+   *
    * @param array $vectorT
-   *  Vetor de Strings.
-   * 
+   *   Vetor de Strings.
+   *
    * @return array
-   *  Novo vetor de Strings corrigido, sem espaços em branco no final.
+   *   Novo vetor de Strings corrigido, sem espaços em branco no final.
    */
   private function removeBlank(array $vectorT): array {
     for ($i = 0; $i < count($vectorT); $i++) {
       $array = str_split($vectorT[$i], 1);
       $len = count($array);
-      if($this->isBlank($array[$len-1])){
+      if ($this->isBlank($array[$len - 1]) ){
         array_pop($array);
       }
-      $vectorT[$i] = implode("",$array); 
+      $vectorT[$i] = implode("", $array); 
     }
     return $vectorT;
   }
@@ -186,7 +186,7 @@ class Resolucao implements TextWrapInterface {
           $word = $aux;
           $this->counter = 0;
           $this->blank = "";
-        } 
+        }
         else {
           do {
             $aux = $this->breakWord($aux, $aux2, $length);
@@ -201,20 +201,20 @@ class Resolucao implements TextWrapInterface {
           $this->counter = mb_strlen($aux2);
           $aux2 = "";
         }
-      } 
+      }
       elseif ($this->counter - 1 == $length) {
         $word .= $aux;
         array_push($result, $word);
         $this->counter = 0;
         $word = "";
-      } 
+      }
       else {
         $aux .= $this->blank;
         $this->blank = "";
         $word .= $aux;
       }
     }
-    $result = $this->removeBlank($result);
+    #$result = $this->removeBlank($result);
     return $result;
   }
 
