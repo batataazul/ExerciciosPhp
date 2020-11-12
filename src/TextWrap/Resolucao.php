@@ -176,12 +176,12 @@ class Resolucao implements TextWrapInterface {
     $word = "";
     $aux = "";
     $aux2 = "";
+    if (empty($text)) {
+      return [""];
+    }
     $this->myText = $text;
     $this->uSafe = str_split($this->myText, 1);
     $this->len = count($this->uSafe);
-    if ($this->len < 1) {
-      return [""];
-    }
     while ($this->index < $this->len) {
       $aux = $this->getWord();
       if ($this->counter - 1 > $length) {
