@@ -14,7 +14,7 @@ class Resolucao implements TextWrapInterface {
   * {@inheritdoc}
   *
   */
-  public function __construct(){
+  public function __construct() {
     $this->myText = "";
     $this->uSafe = array();
     $this->index = 0;
@@ -31,30 +31,30 @@ class Resolucao implements TextWrapInterface {
    * @return bool 
    *  Flag verdadeira se for branco ou falso se não for, ou se a String for maior do que 1
   */
-  private function isBlank(string $char) : bool{
+  private function isBlank(string $char) : bool {
     $pattern = "/\s/u";
-    if (mb_strlen($char,"UTF-8") > 1){
+    if (mb_strlen($char,"UTF-8") > 1) {
       echo("Not Char");
       return false;
     } else{
-        if(preg_match($pattern,$char) == 1){
-          return true;
-        }else{
-          return false;
-        }
+      if(preg_match($pattern,$char) == 1) {
+        return true;
+      } else{
+        return false;
+      }
     }
   }
   /** 
    * Método que pega uma palavra do vetor de caracteres e retorna, atualizando o índice e uma contadora
   */
-  private function getWord() : string{
+  private function getWord() : string {
     $word = "";
     for (; $this->index < $this->len ; $this->index++,$this->counter++) { 
-      if($this->isBlank($this->uSafe[$this->index])){
+      if($this->isBlank($this->uSafe[$this->index])) {
         $this->blank = $this->uSafe[$this->index];
         $this->counter++;
         return $word;
-      }else{
+      }else {
           $word .= $this->uSafe[$this->index];
         }
     }
@@ -72,14 +72,14 @@ class Resolucao implements TextWrapInterface {
    *  @return string
    *      Retorna por valor primeiro pedaço da palavra e o segundo por referência
   */
-  private function breakWord(string $word, string &$word2, int $length) : string{
+  private function breakWord(string $word, string &$word2, int $length) : string {
     $auxAr = mb_str_split($word,1,"UTF-8");
     $word = "";
     $i = 0;
-    for(; $i < $length; $i++){
+    for(; $i < $length; $i++) {
       $word .= $auxAr[$i];
     }
-    for (; $i < count($auxAr);$i++){
+    for (; $i < count($auxAr);$i++) {
       $word2 .= $auxAr;
     }
     return $word;
@@ -97,7 +97,7 @@ class Resolucao implements TextWrapInterface {
     while($this->index < $this->len){
       $aux = $this->getWord();
       if ($this->counter -1 > $length){
-        if(mb_strlen($aux,"UTF-8") < $length){
+        if(mb_strlen($aux,"UTF-8") < $length) {
           array_push($result, $word);
           $word = $aux;
           $this->counter = 0;
@@ -127,6 +127,5 @@ class Resolucao implements TextWrapInterface {
     }
     return $result;
   }
-
 
 }
