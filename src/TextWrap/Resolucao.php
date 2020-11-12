@@ -20,7 +20,7 @@ class Resolucao implements TextWrapInterface {
 
     private string $myText;
     private array $uSafe;
-    private int $indice;
+    private int $index;
     private int $len;
     private int $counter;
     private string $blank;
@@ -78,7 +78,18 @@ class Resolucao implements TextWrapInterface {
         return $word;
     }
 
-    private function breakWord(string $word, string &$word2, int $length){
+    /** 
+     *  Método que pega uma palavra maior que um tamanho e quebra em duas palavras
+     *  @param string word
+     *      Palavra que será quebrada
+     *  @param string word2
+     *      Referência para retornar segunda palavra
+     *  @param int length
+     *      Tamanho máximo que um pedaço pode ter
+     *  @return string
+     *      Retorna por valor primeiro pedaço da palavra e o segundo por referência
+    */
+    private function breakWord(string $word, string &$word2, int $length) : string{
         $auxAr = mb_str_split($word,1,"UTF-8");
         $word = "";
         $i = 0;
