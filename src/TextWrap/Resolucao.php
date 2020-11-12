@@ -151,9 +151,10 @@ class Resolucao implements TextWrapInterface {
       if ($this->isBlank($array[$len - 1])) {
         array_pop($array);
       }
-       foreach ($array as $key => $value) {
-         $word .= $value;
-       }
+      foreach ($array as $key => $value) {
+        $word .= $value;
+      }
+      $vectorT[$i] = $word;
     }
     return $vectorT;
   }
@@ -178,7 +179,7 @@ class Resolucao implements TextWrapInterface {
     $this->myText = $text;
     $this->uSafe = str_split($this->myText, 1);
     $this->len = count($this->uSafe);
-    if ($this->len < 1){
+    if ($this->len < 1) {
       return [""];
     }
     while ($this->index < $this->len) {
