@@ -187,7 +187,7 @@ class Resolucao implements TextWrapInterface {
     while ($this->index < $this->len) {
       $aux = $this->getWord();
       if ($this->counter - 1 > $length) {
-        if (strlen($aux) < $length) {
+        if (mb_strlen($aux, "UTF-8") <= $length) {
           array_push($result, $word);
           $word = $aux;
           $word .= $this->blank;
@@ -220,6 +220,9 @@ class Resolucao implements TextWrapInterface {
         $this->blank = "";
         $word .= $aux;
       }
+    }
+    if (!empty($word)) {
+      array_push($result, $word);
     }
     $result = $this->removeBlank($result);
     return $result;
