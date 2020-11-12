@@ -189,7 +189,7 @@ class Resolucao implements TextWrapInterface {
           array_push($result, $word);
           $word = $aux;
           $word .= $this->blank;
-          $this->counter = 0;
+          $this->counter = strlen($word);
           $this->blank = "";
         }
         else {
