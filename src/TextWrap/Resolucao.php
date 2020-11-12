@@ -4,7 +4,6 @@ namespace Galoa\ExerciciosPhp\TextWrap;
 
 /**
  * Classe para resolução do desafio.
- * 
  */
 class Resolucao implements TextWrapInterface {
 
@@ -68,20 +67,21 @@ class Resolucao implements TextWrapInterface {
    *   String de um caractere para ser verificada.
    *
    * @return bool
-   *   Flag verdadeira se for branco ou falso se não for, 
+   *   Flag verdadeira se for branco ou falso se não for,
    *   ou se a String for maior do que um caractere.
    *   caractere.
    */
-
   private function isBlank(string $char): bool  {
     $pattern = "/\s/u";
     if (strlen($char) > 1) {
       echo ("Not Char");
       return FALSE;
-    } else {
+    } 
+    else {
       if (preg_match($pattern, $char) == 1) {
         return TRUE;
-      } else {
+      } 
+      else {
         return FALSE;
       }
     }
@@ -100,7 +100,8 @@ class Resolucao implements TextWrapInterface {
         $this->counter++;
         $this->index++;
         return $word;
-      } else {
+      } 
+      else {
         $word .= $this->uSafe[$this->index];
       }
     }
@@ -110,11 +111,11 @@ class Resolucao implements TextWrapInterface {
   /**
    * Método que pega uma palavra maior que um tamanho e quebra em duas palavras.
    *
-   * @param string word
+   * @param string $word
    *   Palavra que será quebrada.
-   * @param string word2
+   * @param string $word2
    *   Referência para retornar segunda palavra.
-   * @param int length
+   * @param int $length
    *   Tamanho máximo que um pedaço pode ter.
    *
    * @return string
@@ -155,7 +156,7 @@ class Resolucao implements TextWrapInterface {
     $this->uSafe = str_split($this->myText, 1);
     $this->len = count($this->uSafe);
     if ($this->len < 1){
-      return [];
+      return [""];
     }
     while ($this->index < $this->len) {
       $aux = $this->getWord();
@@ -165,7 +166,8 @@ class Resolucao implements TextWrapInterface {
           $word = $aux;
           $this->counter = 0;
           $this->blank = "";
-        } else {
+        } 
+        else {
           do {
             $aux = $this->breakWord($aux, $aux2, $length);
             $word .= $aux;
@@ -179,12 +181,14 @@ class Resolucao implements TextWrapInterface {
           $this->counter = mb_strlen($aux2);
           $aux2 = "";
         }
-      } elseif ($this->counter - 1 == $length) {
+      } 
+      elseif ($this->counter - 1 == $length) {
         $word .= $aux;
         array_push($result, $word);
         $this->counter = 0;
         $word = "";
-      } else {
+      } 
+      else {
         $aux .= $this->blank;
         $this->blank = "";
         $word .= $aux;
@@ -192,4 +196,5 @@ class Resolucao implements TextWrapInterface {
     }
     return $result;
   }
+
 }
