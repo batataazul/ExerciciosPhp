@@ -164,7 +164,7 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("ucionali", $ret[4]);
     $this->assertEquals("ssimamen", $ret[5]);
     $this->assertEquals("te com", $ret[6]);
-    $this->assertEquals("essa", $ret[7]);
+    $this->assertEquals("esta", $ret[7]);
     $this->assertEquals("medida", $ret[8]);
     $this->assertCount(9, $ret);
   }
