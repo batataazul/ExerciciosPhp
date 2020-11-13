@@ -144,6 +144,17 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("eterna.", $ret[9]);
     $this->assertCount(10, $ret);
   }
+
+  /**
+   * Teste personalizado.
+   *
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
+   */
   public function testForMe4() {
     $ret = $this->resolucao->textWrap("O presidente agiu anticonstitucionalissimamente com esta medida.", 8);
     $this->assertEquals("O presid", $ret[0]);
@@ -156,6 +167,43 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("essa", $ret[7]);
     $this->assertEquals("medida", $ret[8]);
     $this->assertCount(9, $ret);
+  }
+
+  /**
+   * Teste personalizado.
+   *
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
+   */
+  public function testForMe5()
+  {
+    $ret = $this->resolucao->textWrap("Eu vou viajar para o Paraná", 30);
+    $this->assertEquals("Eu vou viajar para o Paraná", $ret[0]);
+    $this->assertCount(1, $ret);
+  }
+
+  /**
+   * Teste personalizado.
+   *
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
+   */
+  public function testForMe6()
+  {
+    $ret = $this->resolucao->textWrap("Eu vou viajar para o Paraná", 10);
+    $this->assertEquals("Eu vou", $ret[0]);
+    $this->assertEquals("viajar", $ret[1]);
+    $this->assertEquals("para o", $ret[2]);
+    $this->assertEquals("Paraná", $ret[3]);
+    $this->assertCount(4, $ret);
   }
   
 
