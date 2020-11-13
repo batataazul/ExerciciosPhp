@@ -66,11 +66,22 @@ class TextWrapTest extends TestCase {
     $this->assertCount(6, $ret);
   }
 
-  public function testForSmallWords3() {
+  public function myText() {
     $ret = $this->resolucao->textWrap("Batata Frita", 6);
     $this->assertEquals("Batata", $ret[0]);
     $this->assertEquals("Frita", $ret[1]);
     $this->assertCount(2, $ret);
+  }
+  public function myText2() {
+    $ret = $this->resolucao->textWrap("O presidente agiu anticonstitucionalissimamente com esta medida.", 10);
+    $this->assertEquals("O", $ret[0]);
+    $this->assertEquals("agiu antic", $ret[1]);
+    $this->assertEquals("onstitucio", $ret[2]);
+    $this->assertEquals("nalissimam", $ret[3]);
+    $this->assertEquals("ente com", $ret[4]);
+    $this->assertEquals("esta", $ret[5]);
+    $this->assertEquals("medida.", $ret[6]);
+    $this->assertCount(7, $ret);
   }
 
 }

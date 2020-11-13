@@ -73,8 +73,7 @@ class Resolucao implements TextWrapInterface {
    */
   private function isBlank(string $char): bool {
     $pattern = "/\s/u";
-    if (strlen($char) > 1) {
-      echo ("Not Char");
+    if (mb_strlen($char,"UTF-8") > 1) {
       return FALSE;
     }
     else {
@@ -123,17 +122,18 @@ class Resolucao implements TextWrapInterface {
    * @return string
    *   Retorna por valor primeiro pedaço da palavra e o segundo por referência.
    */
-  private function breakWord(string $word, string &$word2, int $length): string {
+  private function breakWord(string $word, int $length): array {
     $auxAr = str_split($word, 1);
     $word = "";
-    $i = 0;
-    for (; $i < $length; $i++) {
+    $word2 = "";
+    for ($i = 0; mb_strlen($word,"UTF-8") < $length; $i++) {
       $word .= $auxAr[$i];
     }
-    for (; $i < count($auxAr); $i++) {
-      $word2 .= $auxAr;
+    for ($i = $length; $i < count($auxAr); $i++) {
+      $word2 .= $auxAr[$i];
     }
-    return $word;
+    $returnVec = [$word, $word2];
+    return $returnVec;
   }
 
   /**
@@ -185,6 +185,7 @@ class Resolucao implements TextWrapInterface {
     $this->uSafe = str_split($this->myText, 1);
     $this->len = count($this->uSafe);
     while ($this->index < $this->len) {
+      $counterAux = $this->counter;
       $aux = $this->getWord();
       if ($this->counter - 1 > $length) {
         if (mb_strlen($aux, "UTF-8") <= $length) {
@@ -196,12 +197,16 @@ class Resolucao implements TextWrapInterface {
         }
         else {
           do {
-            $aux = $this->breakWord($aux, $aux2, $length);
+            $left = $length - $counterAux;
+            $auxVec = $this->breakWord($aux, $left);
+            $counterAux = 0;
+            $aux = $auxVec[0];
+            $aux2 = $auxVec[1];
             $word .= $aux;
             array_push($result, $word);
             $word = "";
             $aux = $aux2;
-          } while (strlen($aux2) > $length);
+          } while (mb_strlen($aux2,"UTF-8") > $length);
           $aux2 .= $this->blank;
           $this->blank = "";
           $word = $aux2;
