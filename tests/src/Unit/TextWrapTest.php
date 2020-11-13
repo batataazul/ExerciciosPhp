@@ -110,13 +110,14 @@ class TextWrapTest extends TestCase {
   public function testForMe2() {
     $ret = $this->resolucao->textWrap("O presidente agiu anticonstitucionalissimamente com esta medida.", 10);
     $this->assertEquals("O", $ret[0]);
-    $this->assertEquals("agiu antic", $ret[1]);
-    $this->assertEquals("onstitucio", $ret[2]);
-    $this->assertEquals("nalissimam", $ret[3]);
-    $this->assertEquals("ente com", $ret[4]);
-    $this->assertEquals("esta", $ret[5]);
-    $this->assertEquals("medida.", $ret[6]);
-    $this->assertCount(7, $ret);
+    $this->assertEquals("presidente", $ret[1]);
+    $this->assertEquals("agiu antic", $ret[2]);
+    $this->assertEquals("onstitucio", $ret[3]);
+    $this->assertEquals("nalissimam", $ret[4]);
+    $this->assertEquals("ente com", $ret[5]);
+    $this->assertEquals("esta", $ret[6]);
+    $this->assertEquals("medida.", $ret[7]);
+    $this->assertCount(8, $ret);
   }
 
   /**
