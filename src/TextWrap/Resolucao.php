@@ -73,7 +73,7 @@ class Resolucao implements TextWrapInterface {
    */
   private function isBlank(string $char): bool {
     $pattern = "/\s/u";
-    if (mb_strlen($char,"UTF-8") > 1) {
+    if (mb_strlen($char, "UTF-8") > 1) {
       return FALSE;
     }
     else {
@@ -114,19 +114,17 @@ class Resolucao implements TextWrapInterface {
    *
    * @param string $word
    *   Palavra que será quebrada.
-   * @param string $word2
-   *   Referência para retornar segunda palavra.
    * @param int $length
    *   Tamanho máximo que um pedaço pode ter.
    *
-   * @return string
-   *   Retorna por valor primeiro pedaço da palavra e o segundo por referência.
+   * @return array
+   *   Retorna um vetor cujo primeiro elemento é a primeira parte da palavra e o segundo é a segunda.
    */
   private function breakWord(string $word, int $length): array {
     $auxAr = str_split($word, 1);
     $word = "";
     $word2 = "";
-    for ($i = 0; mb_strlen($word,"UTF-8") < $length; $i++) {
+    for ($i = 0; mb_strlen($word, "UTF-8") < $length; $i++) {
       $word .= $auxAr[$i];
     }
     for ($i = $length; $i < count($auxAr); $i++) {
@@ -206,7 +204,7 @@ class Resolucao implements TextWrapInterface {
             array_push($result, $word);
             $word = "";
             $aux = $aux2;
-          } while (mb_strlen($aux2,"UTF-8") > $length);
+          } while (mb_strlen($aux2, "UTF-8") > $length);
           $aux2 .= $this->blank;
           $this->blank = "";
           $word = $aux2;
