@@ -118,7 +118,7 @@ class Resolucao implements TextWrapInterface {
    *   Tamanho máximo que um pedaço pode ter.
    *
    * @return array
-   *   Retorna um vetor cujo primeiro elemento é a primeira parte da palavra e o segundo é a segunda.
+   *   Retorna um vetor com as duas partes da palavra.
    */
   private function breakWord(string $word, int $length): array {
     $auxAr = str_split($word, 1);

@@ -91,7 +91,7 @@ class TextWrapTest extends TestCase {
    * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
    * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
    */
-  public function myText() {
+  public function testForMe() {
     $ret = $this->resolucao->textWrap("Batata Frita", 6);
     $this->assertEquals("Batata", $ret[0]);
     $this->assertEquals("Frita", $ret[1]);
@@ -107,7 +107,7 @@ class TextWrapTest extends TestCase {
    * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
    * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
    */
-  public function myText2() {
+  public function testForMe2() {
     $ret = $this->resolucao->textWrap("O presidente agiu anticonstitucionalissimamente com esta medida.", 10);
     $this->assertEquals("O", $ret[0]);
     $this->assertEquals("agiu antic", $ret[1]);
@@ -118,5 +118,31 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("medida.", $ret[6]);
     $this->assertCount(7, $ret);
   }
+
+  /**
+   * Teste personalizado.
+   *
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
+   */
+  public function testForMe3() {
+    $ret = $this->resolucao->textWrap("Porque Deus tanto amou o mundo que deu o seu Filho Unigênito,\npara que todo o que nele crer não pereça, mas tenha a vida eterna.", 15);
+    $this->assertEquals("Porque Deus", $ret[0]);
+    $this->assertEquals("tanto amou o", $ret[1]);
+    $this->assertEquals("mundo que deu o", $ret[2]);
+    $this->assertEquals("seu Filho", $ret[3]);
+    $this->assertEquals("Unigênito,\npara", $ret[4]);
+    $this->assertEquals("que todo o que", $ret[5]);
+    $this->assertEquals("nele crer não", $ret[6]);
+    $this->assertEquals("pereça, mas", $ret[7]);
+    $this->assertEquals("tenha a vida", $ret[8]);
+    $this->assertEquals("eterna.", $ret[9]);
+    $this->assertCount(10, $ret);
+  }
+  
 
 }
