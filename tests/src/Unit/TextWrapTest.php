@@ -66,7 +66,7 @@ class TextWrapTest extends TestCase {
     $this->assertCount(6, $ret);
   }
 
-  public function testForSmallWords2() {
+  public function testForSmallWords3() {
     $ret = $this->resolucao->textWrap("Batata Frita", 6);
     $this->assertEquals("Batata", $ret[0]);
     $this->assertEquals("Frita", $ret[1]);
