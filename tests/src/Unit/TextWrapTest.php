@@ -223,8 +223,8 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("Deus", $ret[2]);
     $this->assertEquals("criou", $ret[3]);
     $this->assertEquals("os", $ret[4]);
-    $this->assertEquals("céus", $ret[5]);
-    $this->assertEquals("e a", $ret[6]);
+    $this->assertEquals("céus a", $ret[5]);
+    $this->assertEquals("a", $ret[6]);
     $this->assertEquals("terra", $ret[7]);
     $this->assertCount(8, $ret);
   }

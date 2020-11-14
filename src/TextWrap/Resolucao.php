@@ -95,10 +95,13 @@ class Resolucao implements TextWrapInterface {
     $word = "";
     for (; $this->index < $this->len; $this->index++) {
       $caracter = $this->uSafe[$this->index];
-      if($this->index < $this->len - 1) {
-        if (mb_strlen($caracter . $this->uSafe[$this->index + 1]) == 1) {
+      if ($this->index < $this->len - 1) {
+        while (mb_strlen($caracter . $this->uSafe[$this->index + 1], "UTF-8") == 1) {
           $caracter .= $this->uSafe[$this->index + 1];
           $this->index++;
+          if ($this->index > $this->len - 2) {
+            break;
+          }
         }
       }
       if ($this->isBlank($caracter)) {
@@ -131,11 +134,13 @@ class Resolucao implements TextWrapInterface {
     $auxAr = str_split($word, 1);
     $word = "";
     $word2 = "";
-    for ($i = 0; mb_strlen($word, "UTF-8") < $length; $i++) {
+    $auxCount = 0;
+    for ($i = 0; mb_strlen($word, "UTF-8") < $length; $i++, $auxCount++) {
       $caracter = $auxAr[$i];
-      if (mb_strlen($caracter . $auxAr[$i + 1]) == 1) {
+      while (mb_strlen($caracter . $auxAr[$i + 1], "UTF-8") == 1) {
         $caracter .= $auxAr[$i + 1];
         $i++;
+        $auxCount++;
       }
       $word .= $caracter;
     }
