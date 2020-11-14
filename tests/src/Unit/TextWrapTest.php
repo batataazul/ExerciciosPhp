@@ -217,5 +217,11 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("terra", $ret[7]);
     $this->assertCount(8, $ret);
   }
+  public function testForMe8() {
+    $ret = $this->resolucao-> textWrap("ישו אוהב אותך", 6);
+    $this->assertEquals("ישו", $ret[0]);
+    $this->assertEquals("אוהב", $ret[1]);
+    $this->assertEquals("אותך", $ret[2]);
+    $this->assertCount(3, $ret);
 
 }
