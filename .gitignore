@@ -1,3 +1,5 @@
 tests-results
 vendor
 .DS_Store
+
+src/TextWrap/test.php
