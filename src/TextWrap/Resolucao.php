@@ -135,16 +135,20 @@ class Resolucao implements TextWrapInterface {
     $word = "";
     $word2 = "";
     $auxCount = 0;
+    $lenAux = count($auxAr);
     for ($i = 0; mb_strlen($word, "UTF-8") < $length; $i++, $auxCount++) {
       $caracter = $auxAr[$i];
       while (mb_strlen($caracter . $auxAr[$i + 1], "UTF-8") == 1) {
         $caracter .= $auxAr[$i + 1];
         $i++;
         $auxCount++;
+        if($i > $lenAux - 2){
+          break;
+        }
       }
       $word .= $caracter;
     }
-    for ($i = $auxCount; $i < count($auxAr); $i++) {
+    for ($i = $auxCount; $i < $lenAux; $i++) {
       $word2 .= $auxAr[$i];
     }
     $returnVec = [$word, $word2];
@@ -165,7 +169,11 @@ class Resolucao implements TextWrapInterface {
       $word = "";
       $array = str_split($vectorT[$i], 1);
       $len = count($array);
-      if ($this->isBlank($array[$len - 1])) {
+      $caracter = $array[$len - 1];
+      if (mb_strlen($array[$len - 3] . $array[$len - 2] . $caracter, "UTF-8") == 1){
+        $caracter = $array[$len - 3] . $array[$len - 2] . $caracter;
+      }
+      if ($this->isBlank($caracter)) {
         array_pop($array);
       }
       foreach ($array as $key => $value) {

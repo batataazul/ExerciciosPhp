@@ -225,7 +225,7 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("os", $ret[4]);
     $this->assertEquals("céus e", $ret[5]);
     $this->assertEquals("a", $ret[6]);
-    $this->assertEquals("terra", $ret[7]);
+    $this->assertEquals("terra.", $ret[7]);
     $this->assertCount(8, $ret);
   }
 
@@ -257,11 +257,35 @@ class TextWrapTest extends TestCase {
    * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
    * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
    */
-  public function testForMe9()
-  {
+  public function testForMe9() {
     $ret = $this->resolucao->textWrap("テーブルの上に本があります", 7);
     $this->assertEquals("テーブルの上に", $ret[0]);
     $this->assertEquals("本があります", $ret[1]);
     $this->assertCount(2, $ret);
+  }
+  /**
+   * Teste personalizado.
+   *
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
+   */
+  public function testForMe10()
+  {
+    $ret = $this->resolucao->textWrap("Pois todos pecaram e não alcançam o padrão da glória de Deus, mas ele, em sua graça, nos declara justos por meio de Cristo Jesus, que nos resgatou do castigo por nossos pecados.", 20);
+    $this->assertEquals("Pois todos pecaram e", $ret[0]);
+    $this->assertEquals("não alcançam o", $ret[1]);
+    $this->assertEquals("padrão da glória de", $ret[2]);
+    $this->assertEquals("Deus, mas ele, em", $ret[3]);
+    $this->assertEquals("sua graça, nos", $ret[4]);
+    $this->assertEquals("declara justos por", $ret[5]);
+    $this->assertEquals("meio de Cristo", $ret[6]);
+    $this->assertEquals("Jesus, que nos", $ret[7]);
+    $this->assertEquals("resgatou do castigo", $ret[8]);
+    $this->assertEquals("por nossos pecados.", $ret[9]);
+    $this->assertCount(10, $ret);
   }
 }
