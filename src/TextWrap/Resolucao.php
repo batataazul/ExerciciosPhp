@@ -170,18 +170,14 @@ class Resolucao implements TextWrapInterface {
       $array = str_split($vectorT[$i], 1);
       $len = count($array);
       $caracter = $array[$len - 1];
-      if ($i > 0) {
-        $q = 2;
-      } else{
-        $q = 0;
-      }
-      if ($i > 1) {
-        $t = 3;
-      } else{
-        $t = 0;
-      }
-      if (mb_strlen($array[$len - $t] . $array[$len - $q] . $caracter, "UTF-8") == 1) {
-        $caracter = $array[$len - $t] . $array[$len - $q] . $caracter;
+      if($len > 2) {
+        if (mb_strlen($array[$len - 3] . $array[$len - 2] . $caracter, "UTF-8") == 1) {
+          $caracter = $array[$len - 3] . $array[$len - 2] . $caracter;
+        }
+      } elseif ($len > 1) {
+        if (mb_strlen($array[$len - 2] . $caracter, "UTF-8") == 1) {
+          $caracter = $array[$len - 2] . $caracter;
+        }
       }
       if ($this->isBlank($caracter)) {
         array_pop($array);
