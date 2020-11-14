@@ -172,9 +172,13 @@ class Resolucao implements TextWrapInterface {
       $caracter = $array[$len - 1];
       if ($i > 0) {
         $q = 2;
+      } else{
+        $q = 0;
       }
       if ($i > 1) {
         $t = 3;
+      } else{
+        $t = 0;
       }
       if (mb_strlen($array[$len - $t] . $array[$len - $q] . $caracter, "UTF-8") == 1) {
         $caracter = $array[$len - $t] . $array[$len - $q] . $caracter;
