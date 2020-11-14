@@ -94,15 +94,22 @@ class Resolucao implements TextWrapInterface {
   private function getWord(): string {
     $word = "";
     for (; $this->index < $this->len; $this->index++) {
-      if ($this->isBlank($this->uSafe[$this->index])) {
-        $this->blank = $this->uSafe[$this->index];
+      $caracter = $this->uSafe[$this->index];
+      if($this->index < $this->len - 1) {
+        if (mb_strlen($caracter . $this->uSafe[$this->index + 1]) == 1) {
+          $caracter .= $this->uSafe[$this->index + 1];
+          $this->index++;
+        }
+      }
+      if ($this->isBlank($caracter)) {
+        $this->blank = $caracter;
         $this->index++;
         $this->counter += mb_strlen($word, "UTF-8");
         $this->counter++;
         return $word;
       }
       else {
-        $word .= $this->uSafe[$this->index];
+        $word .= $caracter;
       }
     }
     $this->counter += mb_strlen($word, "UTF-8");
@@ -125,7 +132,12 @@ class Resolucao implements TextWrapInterface {
     $word = "";
     $word2 = "";
     for ($i = 0; mb_strlen($word, "UTF-8") < $length; $i++) {
-      $word .= $auxAr[$i];
+      $caracter = $auxAr[$i];
+      if (mb_strlen($caracter . $auxAr[$i + 1]) == 1) {
+        $caracter .= $auxAr[$i + 1];
+        $i++;
+      }
+      $word .= $caracter;
     }
     for ($i = $length; $i < count($auxAr); $i++) {
       $word2 .= $auxAr[$i];

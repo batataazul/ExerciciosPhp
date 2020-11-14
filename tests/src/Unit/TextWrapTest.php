@@ -205,6 +205,17 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("Paraná", $ret[3]);
     $this->assertCount(4, $ret);
   }
+
+  /**
+   * Teste personalizado.
+   *
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
+   */
   public function testForMe7() {
     $ret = $this->resolucao->textWrap("No princípio Deus criou os céus e a terra.", 6);
     $this->assertEquals("No pri", $ret[0]);
@@ -217,11 +228,40 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("terra", $ret[7]);
     $this->assertCount(8, $ret);
   }
+
+  /**
+   * Teste personalizado Hebraico.
+   *
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
+   */
   public function testForMe8() {
     $ret = $this->resolucao-> textWrap("ישו אוהב אותך", 6);
     $this->assertEquals("ישו", $ret[0]);
     $this->assertEquals("אוהב", $ret[1]);
     $this->assertEquals("אותך", $ret[2]);
     $this->assertCount(3, $ret);
+  }
 
+  /**
+   * Teste personalizado Japonês.
+   *
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
+   */
+  public function testForMe9()
+  {
+    $ret = $this->resolucao->textWrap("テーブルの上に本があります", 7);
+    $this->assertEquals("テーブルの上に", $ret[0]);
+    $this->assertEquals("本があります", $ret[1]);
+    $this->assertCount(2, $ret);
+  }
 }
