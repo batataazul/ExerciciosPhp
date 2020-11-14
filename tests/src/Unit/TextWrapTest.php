@@ -316,4 +316,30 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("'", $ret[13]);
     $this->assertCount(14, $ret);
   }
+
+  /**
+   * Teste personalizado.
+   *
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
+   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
+   */
+  public function testForMe12() {
+    $ret = $this->resolucao->textWrap("Mais um pouco e já não me verão; um pouco mais, e me verão de novo", 7);
+    $this->assertEquals("Mais um", $ret[0]);
+    $this->assertEquals("pouco e", $ret[1]);
+    $this->assertEquals("já não", $ret[2]);
+    $this->assertEquals("me", $ret[3]);
+    $this->assertEquals("verão;", $ret[4]);
+    $this->assertEquals("um", $ret[5]);
+    $this->assertEquals("pouco", $ret[6]);
+    $this->assertEquals("mais, e", $ret[7]);
+    $this->assertEquals("me", $ret[8]);
+    $this->assertEquals("verão", $ret[9]);
+    $this->assertEquals("de novo", $ret[10]);
+    $this->assertCount(11, $ret);
+  }
 }
