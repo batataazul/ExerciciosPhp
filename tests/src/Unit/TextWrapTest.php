@@ -165,7 +165,7 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("ssimamen", $ret[5]);
     $this->assertEquals("te com", $ret[6]);
     $this->assertEquals("esta", $ret[7]);
-    $this->assertEquals("medida", $ret[8]);
+    $this->assertEquals("medida.", $ret[8]);
     $this->assertCount(9, $ret);
   }
 
@@ -205,6 +205,17 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("Paraná", $ret[3]);
     $this->assertCount(4, $ret);
   }
-  
+  public function testForMe7() {
+    $ret = $this->resolucao->textWrap("No princípio Deus criou os céus e a terra.", 6);
+    $this->assertEquals("No pri", $ret[0]);
+    $this->assertEquals("ncípio", $ret[1]);
+    $this->assertEquals("Deus", $ret[2]);
+    $this->assertEquals("criou", $ret[3]);
+    $this->assertEquals("os", $ret[4]);
+    $this->assertEquals("céus", $ret[5]);
+    $this->assertEquals("e a", $ret[6]);
+    $this->assertEquals("terra", $ret[7]);
+    $this->assertCount(8, $ret);
+  }
 
 }
