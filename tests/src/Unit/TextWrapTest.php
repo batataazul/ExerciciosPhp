@@ -288,34 +288,6 @@ class TextWrapTest extends TestCase {
     $this->assertEquals("por nossos pecados.", $ret[9]);
     $this->assertCount(10, $ret);
   }
-  /**
-   * Teste personalizado Hebraico.
-   *
-   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::textWrap
-   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::__construct
-   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::isBlank
-   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::getWord
-   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::breakWord
-   * @covers Galoa\ExerciciosPhp\TextWrap\Resolucao::removeBlank
-   */
-  public function testForMe11() {
-    $ret = $this->resolucao->textWrap("' אַחַ֤ת ׀ שָׁאַ֣לְתִּי מֵֽאֵת־יְהוָה֮ אוֹתָ֪הּ אֲבַ֫קֵּ֥שׁ שִׁבְתִּ֣י בְּבֵית־יְ֭הוָה כָּל־יְמֵ֣י חַיַּ֑י לַחֲז֥וֹת בְּנֹֽעַם־יְ֝הוָ֗ה וּלְבַקֵּ֥ר בְּהֵיכָלֽוֹ׃ '", 7);
-    $this->assertEquals("' אַחַ֤ת ׀", $ret[0]);
-    $this->assertEquals("שָׁאַ֣לְתִּי מֵֽ", $ret[1]);
-    $this->assertEquals("אֵת־יְהוָה֮", $ret[2]);
-    $this->assertEquals("אוֹתָ֪הּ", $ret[3]);
-    $this->assertEquals("אֲבַ֫קֵּ֥שׁ", $ret[4]);
-    $this->assertEquals("שִׁבְתִּ֣י בְּבֵ", $ret[5]);
-    $this->assertEquals("ית־יְ֭הוָה", $ret[6]);
-    $this->assertEquals("כָּל־יְמֵ֣י", $ret[7]);
-    $this->assertEquals("חַיַּ֑י", $ret[8]);
-    $this->assertEquals("לַחֲז֥וֹ  בְּ", $ret[9]);
-    $this->assertEquals("נֹֽעַם־יְ֝הוָ֗", $ret[10]);
-    $this->assertEquals("ה וּלְבַקֵּ֥ר", $ret[11]);
-    $this->assertEquals("בְּהֵיכָלֽוֹ׃", $ret[12]);
-    $this->assertEquals("'", $ret[13]);
-    $this->assertCount(14, $ret);
-  }
 
   /**
    * Teste personalizado.
