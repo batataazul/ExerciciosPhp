@@ -144,7 +144,7 @@ class Resolucao implements TextWrapInterface {
       }
       $word .= $caracter;
     }
-    for ($i = $length; $i < count($auxAr); $i++) {
+    for ($i = $auxCount; $i < count($auxAr); $i++) {
       $word2 .= $auxAr[$i];
     }
     $returnVec = [$word, $word2];
